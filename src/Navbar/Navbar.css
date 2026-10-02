@@ -1,166 +1,35 @@
-.site-header {
-  position: sticky;
-  top: 0;
-  z-index: 30;
-  background: var(--paper);
-  border-bottom: 1px solid var(--line);
-}
-.announcement {
-  background: var(--navy);
-  color: #e9e4d8;
-  font-size: 9px;
-  letter-spacing: 1.7px;
-}
-.announcement-inner {
-  height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.announcement-location {
-  letter-spacing: 1px;
-}
-.announcement-location span {
-  margin-left: 12px;
-  color: var(--gold);
-}
-.navbar {
-  height: 102px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 24px;
-}
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-shrink: 0;
-}
-.brand img {
-  width: 66px;
-  height: 66px;
-  mix-blend-mode: multiply;
-}
-.brand-type {
-  font-family: var(--sans);
-  font-size: 18px;
-  letter-spacing: 2.7px;
-  font-weight: 600;
-  color: var(--navy);
-  line-height: 1.5;
-}
-.brand-type>span {
-  display: block;
-  font-size: 8px;
-  letter-spacing: 3.2px;
-  font-weight: 500;
-}
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 31px;
-}
-.nav-links>a {
-  font-size: 11px;
-  font-weight: 500;
-  white-space: nowrap;
-  position: relative;
-}
-.nav-links>a:not(.nav-contact)::after {
-  content: '';
-  position: absolute;
-  bottom: -7px;
-  left: 0;
-  width: 0;
-  height: 1px;
-  background: var(--gold);
-  transition: width .2s;
-}
-.nav-links>a:hover::after {
-  width: 100%;
-}
-.nav-links .nav-contact {
-  border: 1px solid var(--navy);
-  padding: 15px 19px;
-  margin-left: 8px;
-  font-size: 10px;
-}
-.nav-contact span {
-  margin-left: 17px;
-}
-.nav-contact:hover {
-  background: var(--navy);
-  color: white;
-}
-.menu-toggle {
-  display: none;
-  background: transparent;
-  border: 1px solid var(--line);
-  width: 44px;
-  height: 44px;
-  padding: 12px;
-  cursor: pointer;
-}
-.menu-toggle span {
-  display: block;
-  height: 1px;
-  background: var(--navy);
-  margin: 6px 0;
-}
-@media(max-width:1100px) {
-  .nav-links {
-    gap: 19px;
-  }
-  .brand-type {
-    font-size: 15px;
-  }
-  .nav-links .nav-contact {
-    margin-left: 0;
-    padding: 13px;
-  }
-}
+﻿.site-header { position: fixed; inset: 0 0 auto; z-index: 40; color: #fffdf7; border-bottom: 1px solid #ffffff26; transition: background .35s, color .35s, border-color .35s; }
+.navbar { height: 106px; display: flex; justify-content: space-between; align-items: center; gap: 28px; transition: height .35s; }
+.site-header.is-scrolled, .site-header.menu-is-open { background: #f7f5f0f2; color: var(--ink); backdrop-filter: blur(16px); border-color: var(--line); }
+.is-scrolled .navbar { height: 80px; }
+.brand { display: flex; align-items: center; gap: 15px; flex-shrink: 0; }
+.brand-monogram { position: relative; font: 35px var(--serif); letter-spacing: -5px; padding-right: 9px; padding-bottom: 5px; }
+.brand-monogram>span { position: absolute; height: 1px; width: 32px; bottom: 1px; left: 3px; background: var(--gold-light); }
+.brand-type { font-size: 16px; font-weight: 600; letter-spacing: 2.7px; }
+.brand-type>span { display: block; font-size: 7px; letter-spacing: 3.5px; margin-top: 5px; font-weight: 400; }
+.desktop-links { display: flex; gap: 30px; }
+.desktop-links>a { font-size: 11px; padding-block: 12px; position: relative; }
+.desktop-links>a::after { content: ''; position: absolute; bottom: 6px; left: 0; width: 100%; height: 1px; background: currentColor; transform: scaleX(0); transform-origin: left; transition: transform .25s; }
+.desktop-links>a:hover::after, .desktop-links>a:focus-visible::after { transform: scaleX(1); }
+.nav-contact { display: flex; align-items: center; gap: 30px; border: 1px solid #ffffff70; padding: 15px 21px; font-size: 11px; transition: background .2s; }
+.is-scrolled .nav-contact { border-color: var(--line); }
+.nav-contact:hover { background: #ffffff18; }
+.is-scrolled .nav-contact:hover { background: var(--cream); }
+.menu-toggle { display: none; width: 44px; height: 44px; border: 1px solid currentColor; padding: 12px 9px; background: transparent; cursor: pointer; }
+.menu-toggle>span { display: block; height: 1px; background: currentColor; margin: 6px 0; transition: transform .25s; }
+.menu-is-open .menu-toggle>span:first-child { transform: translateY(3.5px) rotate(45deg); }
+.menu-is-open .menu-toggle>span:last-child { transform: translateY(-3.5px) rotate(-45deg); }
+.mobile-navigation { display: none; }
+@media(max-width:1100px) { .desktop-links { gap: 20px; } .nav-contact { gap: 15px; } .brand-type { font-size: 14px; } }
 @media(max-width:900px) {
-  .navbar {
-    height: 84px;
-  }
-  .brand img {
-    width: 56px;
-    height: 56px;
-  }
-  .menu-toggle {
-    display: block;
-  }
-  .nav-links {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: var(--paper);
-    padding: 22px 6vw 30px;
-    border-bottom: 1px solid var(--line);
-    box-shadow: 0 16px 22px #071b2b12;
-  }
-  .nav-links.is-open {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0;
-  }
-  .nav-links>a {
-    padding: 15px 0;
-    font-size: 14px;
-  }
-  .nav-links .nav-contact {
-    margin-top: 14px;
-    padding: 15px 20px;
-  }
-  .announcement-location {
-    display: none;
-  }
-  .announcement-inner {
-    justify-content: center;
-    font-size: 8px;
-  }
+  .navbar { height: 84px; } .is-scrolled .navbar { height: 72px; }
+  .desktop-links, .desktop-contact { display: none; } .menu-toggle { display: block; }
+  .mobile-navigation { display: flex; flex-direction: column; padding: 25px 6vw 35px; background: var(--paper); max-height: calc(100svh - 84px); overflow-y: auto; border-top: 1px solid var(--line); }
+  .mobile-navigation>.eyebrow { margin-bottom: 24px; }
+  .mobile-navigation>a:not(.button) { display: flex; gap: 23px; align-items: center; font: 32px var(--serif); padding-block: 13px; border-top: 1px solid var(--line); }
+  .mobile-navigation>a>span { font: 10px var(--sans); color: var(--gold); }
+  .mobile-navigation>a>.icon { margin-left: auto; }
+  .mobile-navigation>.button { margin-top: 24px; }
+  .mobile-navigation>p { font-size: 11px; color: var(--muted); margin-top: 24px; }
 }
+

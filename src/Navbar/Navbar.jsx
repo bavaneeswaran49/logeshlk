@@ -1,30 +1,56 @@
-﻿import { useEffect, useRef, useState } from 'react'
-import logo from '../assets/logo.png'
+import { useEffect, useRef, useState } from 'react'
+import { AnimatePresence, motion as Motion, useReducedMotion } from 'framer-motion'
+import { menuReveal } from '../motion/variants'
+import Icon from '../components/Icon'
 import './Navbar.css'
 
-const links = [['About us', 'about'], ['Villa collection', 'villas'], ['Our expertise', 'services'], ['Our process', 'process']]
+const links = [['Villas', 'villas'], ['Services', 'services'], ['Process', 'process'], ['About', 'about'], ['FAQ', 'faq']]
 export default function Navbar() {
   const [open, setOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
   const toggleRef = useRef(null)
+  const menuRef = useRef(null)
+  const reduced = useReducedMotion()
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 48)
+    handleScroll()
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
   useEffect(() => {
     if (!open) return
-    const closeOnEscape = (event) => {
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    menuRef.current?.querySelector('a')?.focus()
+    const handleKey = event => {
       if (event.key === 'Escape') { setOpen(false); toggleRef.current?.focus() }
+      if (event.key === 'Tab') {
+        const items = [toggleRef.current, ...menuRef.current.querySelectorAll('a')]
+        const first = items[0], last = items.at(-1)
+        if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus() }
+        else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus() }
+      }
     }
-    const closeOnResize = () => { if (window.innerWidth > 900) setOpen(false) }
-    document.addEventListener('keydown', closeOnEscape)
-    window.addEventListener('resize', closeOnResize)
-    return () => { document.removeEventListener('keydown', closeOnEscape); window.removeEventListener('resize', closeOnResize) }
+    const handleResize = () => { if (window.innerWidth > 900) setOpen(false) }
+    document.addEventListener('keydown', handleKey)
+    window.addEventListener('resize', handleResize)
+    return () => {
+      document.body.style.overflow = previousOverflow
+      document.removeEventListener('keydown', handleKey)
+      window.removeEventListener('resize', handleResize)
+    }
   }, [open])
-  return <header className="site-header">
-    <div className="announcement"><div className="container announcement-inner"><span>BUILT AROUND YOU. ROOTED IN TIRUPUR.Service all Around Tamil Nadu</span><span className="announcement-location">Tirupur, Tamil Nadu <span aria-hidden="true">↗</span></span></div></div>
+  const closeMenu = () => setOpen(false)
+  return <header className={`site-header ${scrolled ? 'is-scrolled' : ''} ${open ? 'menu-is-open' : ''}`}>
     <nav className="navbar container" aria-label="Main navigation">
-      <a className="brand" href="#home" aria-label="Sri Builders and Developers home" onClick={() => setOpen(false)}><img src={logo} alt="" width="66" height="66" /><span className="brand-type">SRI BUILDERS<span>AND DEVELOPERS</span></span></a>
-      <button ref={toggleRef} className="menu-toggle" type="button" aria-controls="primary-navigation" aria-expanded={open} aria-label={open ? 'Close navigation' : 'Open navigation'} onClick={() => setOpen(!open)}><span /><span /></button>
-      <div id="primary-navigation" className={`nav-links ${open ? 'is-open' : ''}`}>
-        {links.map(([label, id]) => <a key={id} href={`#${id}`} onClick={() => setOpen(false)}>{label}</a>)}
-        <a href="#contact" className="nav-contact" onClick={() => setOpen(false)}>Let’s build your home <span aria-hidden="true">↗</span></a>
-      </div>
+      <a className="brand" href="#home" aria-label="Sri Builders home" onClick={closeMenu}><span className="brand-monogram" aria-hidden="true">SB<span /></span><span className="brand-type">SRI BUILDERS<span>AND DEVELOPERS</span></span></a>
+      <div className="desktop-links">{links.map(([label, id]) => <a key={id} href={`#${id}`}>{label}</a>)}</div>
+      <a href="#contact" className="nav-contact desktop-contact">Start your villa <Icon /></a>
+      <button ref={toggleRef} className="menu-toggle" type="button" aria-controls="mobile-navigation" aria-expanded={open} aria-label={open ? 'Close navigation' : 'Open navigation'} onClick={() => setOpen(value => !value)}><span /><span /></button>
     </nav>
+    <div id="mobile-navigation"><AnimatePresence>{open && <Motion.nav ref={menuRef} className="mobile-navigation" aria-label="Mobile navigation" variants={menuReveal} initial={reduced ? false : 'hidden'} animate="visible" exit="exit">
+      <span className="eyebrow">A HOME, DISTINCTLY YOURS</span>{links.map(([label, id], index) => <a key={id} href={`#${id}`} onClick={closeMenu}><span>0{index + 1}</span>{label}<Icon /></a>)}
+      <a href="#contact" className="button button-dark" onClick={closeMenu}>Start your villa <Icon /></a><p>Tiruppur, Tamil Nadu</p>
+    </Motion.nav>}</AnimatePresence></div>
   </header>
 }

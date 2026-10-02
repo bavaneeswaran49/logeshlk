@@ -1,31 +1,31 @@
 ﻿# Sri Builders and Developers
 
-A responsive, villa-focused website for a construction company based in Tirupur, Tamil Nadu. Built with React and Vite, with a warm ivory, navy and muted gold design.
+A responsive villa construction homepage for Sri Builders in Tiruppur, Tamil Nadu. Built with React, Vite and Framer Motion, using a warm ivory, charcoal and bronze palette.
 
-## Run locally
+## Development
 
-Install dependencies with `npm install`, then run `npm run dev`. In Windows PowerShell with script execution restricted, use `npm.cmd` instead of `npm`.
+- `npm install` installs dependencies.
+- `npm run dev` starts the development server.
+- `npm run lint` checks source code.
+- `npm run check` renders the homepage and checks navigation, local images, accessibility control references, metadata and enquiry encoding.
+- `npm run build` creates production assets in `dist`.
+- `npm run preview` serves the production build.
 
-- `npm run build` creates the static production site in `dist`.
-- `npm run lint` checks the JavaScript and React source.
-- `npm run preview` serves the production build locally.
+On Windows with PowerShell script execution restricted, use `npm.cmd`.
 
-## Content and enquiries
+## Content
 
-Business contact details and villa concepts are in `src/siteContent.js`. The current phone and WhatsApp number is +91 99522 72769. The enquiry form validates the visitor's details and opens a prefilled WhatsApp conversation. The visitor reviews and sends the message in WhatsApp; the site does not store enquiries or claim they have been submitted.
+Business details and villa design directions are in `src/siteContent.js`. Images are architectural concepts for inspiration, not completed Sri Builders projects. Original PNG assets remain available; the page uses compressed JPEG copies for faster downloads. The existing brand logo, favicon and social preview are retained.
 
-Villa images are AI-generated architectural concepts, clearly labelled as inspiration rather than completed projects. Replace these with approved project photography when available. No invented project counts, testimonials, costs or delivery promises are included.
+The enquiry form validates details and prepares a WhatsApp message. Visitors review and send the message in WhatsApp. There is no enquiry database or backend submission.
 
-## Features
+## Motion and accessibility
 
-Responsive mobile navigation, villa style filters, accessible native villa-detail dialogs, service and process sections, FAQ disclosures, and direct phone/WhatsApp contact. Includes reduced-motion support, focus styles, search metadata, structured business information, and a branded social preview.
+Shared transitions and variants live in `src/motion`. Reveals run once, while scroll movement is limited to two large image sections. Motion respects the visitor's reduced-motion setting.
+
+The mobile navigation supports Escape, focus containment and scroll locking. Villa details use a native modal dialog. FAQ controls expose expanded state and linked answer regions. All primary navigation links point to sections on the homepage.
 
 ## Hosting
 
-The Sites project is linked through `.openai/hosting.json`; the static output directory is `dist`. The canonical and social metadata currently reference the Sites origin in `index.html`; update them when connecting a different domain.
+The existing Sites configuration in `.openai/hosting.json` is preserved. Static output is published from `dist`.
 
-## Generated assets
-
-Built-in ImageGen prompts: premium contemporary Tamil Nadu villa in warm evening light; limestone and timber courtyard villa; understated ivory and walnut villa interior; navy/ivory/gold social card with the headline “Extraordinary homes. Thoughtfully built.”
-
-Assets: `public/images/villa-hero.png`, `public/images/villa-courtyard.png`, `public/images/villa-interior.png`, and `public/og.png`.

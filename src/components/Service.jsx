@@ -1,9 +1,18 @@
+import { motion as Motion, useReducedMotion } from 'framer-motion'
+import Reveal from '../motion/Reveal'
+import { fadeUp, stagger, viewport } from '../motion/variants'
 import Icon from './Icon'
+
 const services = [
-  { icon: 'home', title: 'Premium villa construction', copy: 'Your home, brought to life. A considered approach to building, from the structure to the smallest finishing detail.', detail: 'FROM FOUNDATION TO FINISH' },
-  { icon: 'compass', title: 'Architecture & planning', copy: 'Spaces shaped around you. A personal design conversation about how you live, what you love and what your plot can become.', detail: 'A VISION WITH PURPOSE' },
-  { icon: 'layers', title: 'Interiors & finishes', copy: 'Materials you can feel. An intentional palette of textures, finishes and details that brings warmth and character to your home.', detail: 'THE DETAILS MAKE THE DIFFERENCE' },
+  ['Architecture & planning', 'Planning and architectural direction for a villa shaped around your plot and the way you live.', 'DESIGN'],
+  ['Villa construction', 'Structural and finishing execution, with attention to the details that bring your approved design to life.', 'BUILD'],
+  ['Interiors & finishes', 'Interior coordination and finishing direction, connecting materials, textures and spaces.', 'DETAIL'],
+  ['Concept to completion', 'A coordinated journey from the initial idea to the final walkthrough of your home.', 'COORDINATE'],
 ]
 export default function Service() {
-  return <section id="services" className="services-section section" aria-labelledby="services-title"><div className="container"><div className="section-heading"><div><span className="eyebrow">OUR EXPERTISE</span><h2 id="services-title">One vision.<br /><em>Every detail considered.</em></h2></div><a href="#contact" className="text-link">Let’s discuss your home <Icon /></a></div><div className="service-grid">{services.map((service, index) => <article className="service-card" key={service.title}><div className="service-top"><Icon name={service.icon} /><span>0{index + 1}</span></div><h3>{service.title}</h3><p>{service.copy}</p><a href="#contact">{service.detail}<Icon /></a></article>)}</div></div></section>
+  const reduced = useReducedMotion()
+  return <section id="services" className="services-section section" aria-labelledby="services-title"><div className="container">
+    <Reveal className="section-heading"><div><span className="eyebrow">04 / WHAT WE DO</span><h2 id="services-title">One home.<br /><em>A complete perspective.</em></h2></div><a href="#contact" className="text-link">Discuss your requirements <Icon /></a></Reveal>
+    <Motion.div className="service-list" variants={stagger} initial={reduced ? false : 'hidden'} whileInView="visible" viewport={viewport}>{services.map(([title, copy, label], index) => <Motion.a variants={fadeUp} className="service-row" href="#contact" key={title}><span className="service-number">0{index + 1}</span><div><span className="eyebrow">{label}</span><h3>{title}</h3></div><p>{copy}</p><Icon /></Motion.a>)}</Motion.div>
+  </div></section>
 }
