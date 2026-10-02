@@ -18,7 +18,14 @@ try {
   for (const [, anchor] of html.matchAll(/href="#([^"]+)"/g)) assert(ids.includes(anchor), 'Broken anchor: ' + anchor)
   for (const [, target] of html.matchAll(/aria-controls="([^"]+)"/g)) assert(ids.includes(target), 'Missing accessible control target: ' + target)
   const sectionCount = (html.match(/<section\b/g) || []).length
-  assert.equal(sectionCount, 9, 'Homepage narrative sections')
+  assert.equal(sectionCount, 7, 'Homepage narrative sections')
+  const sectionOrder = [...html.matchAll(/<section\b[^>]*\bid="([^"]+)"/g)].map(match => match[1])
+  assert.deepEqual(sectionOrder, ['home', 'villas', 'services', 'process', 'about', 'faq', 'contact'], 'Visitor journey follows discovery through enquiry')
+  const hero = html.slice(html.indexOf('id="home"'), html.indexOf('class="journey-strip"'))
+  assert(hero.indexOf('href="#villas"') < hero.indexOf('href="#contact"'), 'Hero leads with exploration')
+  const expectedLinks = ['villas', 'services', 'process', 'about', 'faq']
+  const desktopNav = html.match(/class="desktop-links"[^>]*>(.*?)<\/div>/)?.[1]
+  assert.deepEqual([...desktopNav.matchAll(/href="#([^"]+)"/g)].map(match => match[1]), expectedLinks, 'Navigation follows page order')
   for (const [, src] of html.matchAll(/<img[^>]+src="([^"]+)"/g)) {
     const path = src.startsWith('/src/') ? src.slice(1) : 'public' + src
     assert(existsSync(resolve(path)), 'Missing image: ' + src)
@@ -36,7 +43,7 @@ try {
   const index = readFileSync('index.html', 'utf8')
   assert(index.includes('og:image') && existsSync('public/og.png'), 'Social preview missing')
   assert(!index.includes('Vite + React'), 'Starter metadata remains')
-  console.log('PASS: rendered homepage, 9 sections, navigation anchors, unique IDs, local images, external links, enquiry encoding and social preview.')
+  console.log('PASS: rendered homepage, ordered 7-section journey, navigation order, discovery CTA, unique IDs, local images, external links, enquiry encoding and social preview.')
 } finally { await server.close() }
 
 

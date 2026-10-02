@@ -12,7 +12,8 @@ const services = [
 export default function Service() {
   const reduced = useReducedMotion()
   return <section id="services" className="services-section section" aria-labelledby="services-title"><div className="container">
-    <Reveal className="section-heading"><div><span className="eyebrow">04 / WHAT WE DO</span><h2 id="services-title">One home.<br /><em>A complete perspective.</em></h2></div><a href="#contact" className="text-link">Discuss your requirements <Icon /></a></Reveal>
-    <Motion.div className="service-list" variants={stagger} initial={reduced ? false : 'hidden'} whileInView="visible" viewport={viewport}>{services.map(([title, copy, label], index) => <Motion.a variants={fadeUp} className="service-row" href="#contact" key={title}><span className="service-number">0{index + 1}</span><div><span className="eyebrow">{label}</span><h3>{title}</h3></div><p>{copy}</p><Icon /></Motion.a>)}</Motion.div>
+    <Reveal className="section-heading"><div><span className="eyebrow">02 / WHAT WE DO</span><h2 id="services-title">From a possibility<br /><em>to a complete home.</em></h2></div><p>Planning, construction and finishes, brought together around the scope your home needs.</p></Reveal>
+    <Motion.div className="service-list" variants={stagger} initial={reduced ? false : 'hidden'} whileInView="visible" viewport={viewport}>{services.map(([title, copy, label], index) => <Motion.article variants={fadeUp} className="service-row" key={title}><span className="service-number">0{index + 1}</span><div><span className="eyebrow">{label}</span><h3>{title}</h3></div><p>{copy}</p></Motion.article>)}</Motion.div>
+    <div className="section-next"><p>How does it all come together?</p><a href="#process" className="text-link">See the building process <Icon /></a></div>
   </div></section>
 }

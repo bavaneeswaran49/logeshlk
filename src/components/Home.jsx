@@ -18,12 +18,16 @@ export default function Home() {
       <Motion.div className="hero-content container" variants={stagger} initial={reduced ? false : 'hidden'} animate="visible">
         <Motion.span variants={fadeUp} className="hero-eyebrow"><span /> PREMIUM VILLA CONSTRUCTION · TIRUPPUR</Motion.span>
         <h1 id="hero-title"><Motion.span variants={fadeUp}>Villas, crafted</Motion.span><Motion.span variants={fadeUp}>around <em>your life.</em></Motion.span></h1>
-        <Motion.p variants={fadeUp}>Thoughtful design. Precise construction.<br />Homes made for the way you live.</Motion.p>
-        <Motion.div variants={fadeUp} className="hero-actions"><a className="button button-light" href="#contact">Start your villa <Icon /></a><a className="hero-explore" href="#villas">Explore villa styles <span aria-hidden="true">↗</span></a></Motion.div>
+        <Motion.p variants={fadeUp}>Custom villa design and construction in Tiruppur.<br />From your first idea to a home that feels like you.</Motion.p>
+        <Motion.div variants={fadeUp} className="hero-actions"><a className="button button-light" href="#villas">Explore villa styles <Icon /></a><a className="hero-explore" href="#contact">Discuss your home <span aria-hidden="true">↗</span></a></Motion.div>
       </Motion.div>
-      <div className="hero-bottom container"><a href="#about"><Motion.span className="scroll-line" aria-hidden="true" initial={reduced ? false : { scaleY: 0 }} animate={{ scaleY: 1 }} transition={{ ...transitions.cinematic, delay: 0.8 }} />SCROLL TO DISCOVER</a><span>ARCHITECTURAL CONCEPT · A HOME, DISTINCTLY YOURS</span></div>
+      <div className="hero-bottom container"><a href="#villas"><Motion.span className="scroll-line" aria-hidden="true" initial={reduced ? false : { scaleY: 0 }} animate={{ scaleY: 1 }} transition={{ ...transitions.cinematic, delay: 0.8 }} />FIND YOUR INSPIRATION</a><span>ARCHITECTURAL CONCEPT · A HOME, DISTINCTLY YOURS</span></div>
       <span className="hero-side-note" aria-hidden="true">DESIGNED WITH PURPOSE. BUILT WITH CARE.</span>
     </section>
-    <div className="values-strip"><div className="container values-inner"><span><span className="value-mark">01 /</span> Personal by design</span><span><span className="value-mark">02 /</span> Precise in every detail</span><span><span className="value-mark">03 /</span> Rooted in Tiruppur</span></div></div>
+    <nav className="journey-strip" aria-label="Plan your home"><div className="container journey-inner">
+      <a href="#villas"><span className="journey-number">01</span><span>Find your style<small>Explore the possibilities</small></span><Icon /></a>
+      <a href="#process"><span className="journey-number">02</span><span>Understand the journey<small>See how your home takes shape</small></span><Icon /></a>
+      <a href="#contact"><span className="journey-number">03</span><span>Talk about your home<small>Share your idea with us</small></span><Icon /></a>
+    </div></nav>
   </>
 }

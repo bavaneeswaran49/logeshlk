@@ -33,20 +33,20 @@ button, a { touch-action: manipulation; }
 .container { width: min(1320px, 88%); margin-inline: auto; }
 .skip-link { position: fixed; left: 20px; top: -80px; z-index: 100; background: var(--paper); padding: 12px 20px; }
 .skip-link:focus { top: 12px; }
-.eyebrow { display: block; font-size: 10px; line-height: 1.8; letter-spacing: 2px; text-transform: uppercase; font-weight: 500; color: var(--gold); }
-.button { display: inline-flex; align-items: center; justify-content: space-between; gap: 40px; padding: 20px 26px; font-size: 11px; font-weight: 500; border: 1px solid transparent; cursor: pointer; transition: background .2s, color .2s; }
+.eyebrow { display: block; font-size: 11px; line-height: 1.8; letter-spacing: 2px; text-transform: uppercase; font-weight: 500; color: var(--gold); }
+.button { display: inline-flex; align-items: center; justify-content: space-between; gap: 40px; padding: 20px 26px; font-size: 12px; font-weight: 500; border: 1px solid transparent; cursor: pointer; transition: background .2s, color .2s; }
 .button-light { background: var(--paper); color: var(--ink); }
 .button-light:hover { background: #e5ddce; }
 .button-dark { background: var(--navy); color: var(--paper); }
 .button-dark:hover { background: #3d4b46; }
 .button-outline { background: transparent; color: white; border-color: #ffffff70; }
-.text-link { display: inline-flex; gap: 28px; align-items: center; font-size: 11px; border-bottom: 1px solid var(--gold); padding-bottom: 12px; }
-.section { padding-block: 120px; }
+.text-link { display: inline-flex; gap: 28px; align-items: center; font-size: 12px; border-bottom: 1px solid var(--gold); padding-bottom: 12px; }
+.section { padding-block: 96px; }
 h2 { font-family: var(--serif); font-size: clamp(44px, 4.8vw, 72px); font-weight: 400; line-height: 1.04; letter-spacing: -1.4px; }
 h2 em { font-weight: 400; color: var(--gold); }
 .section-heading { display: flex; justify-content: space-between; align-items: flex-end; gap: 45px; margin-bottom: 55px; }
 .section-heading .eyebrow { margin-bottom: 24px; }
-.section-heading>p { max-width: 320px; font-size: 13px; line-height: 1.9; color: var(--muted); }
+.section-heading>p { max-width: 320px; font-size: 14px; line-height: 1.9; color: var(--muted); }
 @media(max-width:700px) {
   .section { padding-block: 75px; }
   .section-heading { align-items: flex-start; flex-direction: column; gap: 25px; margin-bottom: 35px; }

@@ -13,6 +13,10 @@ A responsive villa construction homepage for Sri Builders in Tiruppur, Tamil Nad
 
 On Windows with PowerShell script execution restricted, use `npm.cmd`.
 
+## Visitor flow
+
+The homepage follows introduction → villa styles → services → process → about → FAQs → enquiry. Navigation follows the same order and marks the current section. Each discovery section offers a next step, while visitors who are ready can go directly to an enquiry. Villa details carry the selected style into the form. Repeated brand sections are consolidated into the introduction and about section.
+
 ## Content
 
 Business details and villa design directions are in `src/siteContent.js`. Images are architectural concepts for inspiration, not completed Sri Builders projects. Original PNG assets remain available; the page uses compressed JPEG copies for faster downloads. The existing brand logo, favicon and social preview are retained.

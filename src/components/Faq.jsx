@@ -16,7 +16,7 @@ export default function Faq() {
   const reduced = useReducedMotion()
   return <section id="faq" className="faq-section section container" aria-labelledby="faq-title">
     <Reveal>
-      <span className="eyebrow">07 / A LITTLE MORE CLARITY</span>
+      <span className="eyebrow">05 / YOUR QUESTIONS</span>
       <h2 id="faq-title">Before<br /><em>we begin.</em></h2>
       <p>Good questions.<br />Thoughtful conversations.</p>
       <a className="text-link" href="#contact">Ask us something <span aria-hidden="true">↗</span></a>

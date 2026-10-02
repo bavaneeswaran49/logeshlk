@@ -2,20 +2,35 @@ import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion as Motion, useReducedMotion } from 'framer-motion'
 import { menuReveal } from '../motion/variants'
 import Icon from '../components/Icon'
+import Brand from '../components/Brand'
 import './Navbar.css'
 
 const links = [['Villas', 'villas'], ['Services', 'services'], ['Process', 'process'], ['About', 'about'], ['FAQ', 'faq']]
 export default function Navbar() {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [activeSection, setActiveSection] = useState('home')
   const toggleRef = useRef(null)
   const menuRef = useRef(null)
   const reduced = useReducedMotion()
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 48)
+    let frame = 0
+    const updatePosition = () => {
+      setScrolled(window.scrollY > 48)
+      const sections = ['home', ...links.map(([, id]) => id), 'contact']
+      const current = sections.filter(id => document.getElementById(id)?.getBoundingClientRect().top <= 150).at(-1)
+      setActiveSection(current || 'home')
+      frame = 0
+    }
+    const handleScroll = () => { if (!frame) frame = requestAnimationFrame(updatePosition) }
     handleScroll()
     window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
+    window.addEventListener('resize', handleScroll)
+    return () => {
+      cancelAnimationFrame(frame)
+      window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('resize', handleScroll)
+    }
   }, [])
   useEffect(() => {
     if (!open) return
@@ -43,14 +58,14 @@ export default function Navbar() {
   const closeMenu = () => setOpen(false)
   return <header className={`site-header ${scrolled ? 'is-scrolled' : ''} ${open ? 'menu-is-open' : ''}`}>
     <nav className="navbar container" aria-label="Main navigation">
-      <a className="brand" href="#home" aria-label="Sri Builders home" onClick={closeMenu}><span className="brand-monogram" aria-hidden="true">SB<span /></span><span className="brand-type">SRI BUILDERS<span>AND DEVELOPERS</span></span></a>
-      <div className="desktop-links">{links.map(([label, id]) => <a key={id} href={`#${id}`}>{label}</a>)}</div>
-      <a href="#contact" className="nav-contact desktop-contact">Start your villa <Icon /></a>
+      <Brand onClick={closeMenu} />
+      <div className="desktop-links">{links.map(([label, id]) => <a key={id} href={`#${id}`} aria-current={activeSection === id ? 'location' : undefined}>{label}</a>)}</div>
+      <a href="#contact" className="nav-contact desktop-contact" aria-current={activeSection === 'contact' ? 'location' : undefined}>Discuss your home <Icon /></a>
       <button ref={toggleRef} className="menu-toggle" type="button" aria-controls="mobile-navigation" aria-expanded={open} aria-label={open ? 'Close navigation' : 'Open navigation'} onClick={() => setOpen(value => !value)}><span /><span /></button>
     </nav>
     <div id="mobile-navigation"><AnimatePresence>{open && <Motion.nav ref={menuRef} className="mobile-navigation" aria-label="Mobile navigation" variants={menuReveal} initial={reduced ? false : 'hidden'} animate="visible" exit="exit">
-      <span className="eyebrow">A HOME, DISTINCTLY YOURS</span>{links.map(([label, id], index) => <a key={id} href={`#${id}`} onClick={closeMenu}><span>0{index + 1}</span>{label}<Icon /></a>)}
-      <a href="#contact" className="button button-dark" onClick={closeMenu}>Start your villa <Icon /></a><p>Tiruppur, Tamil Nadu</p>
+      <span className="eyebrow">EXPLORE YOUR NEXT HOME</span>{links.map(([label, id], index) => <a key={id} href={`#${id}`} aria-current={activeSection === id ? 'location' : undefined} onClick={closeMenu}><span>0{index + 1}</span>{label}<Icon /></a>)}
+      <a href="#contact" className="button button-dark" onClick={closeMenu}>Discuss your home <Icon /></a><p>Tiruppur, Tamil Nadu</p>
     </Motion.nav>}</AnimatePresence></div>
   </header>
 }
