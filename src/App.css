@@ -1,4 +1,22 @@
 /* Opening */
+/* Language selection */
+.language-dialog { position: fixed; inset: 0; margin: auto; width: min(560px, calc(100% - 32px)); max-height: calc(100svh - 32px); overflow-y: auto; border: 1px solid var(--line); background: var(--paper); color: var(--ink); padding: 48px 36px 32px; }
+.language-dialog::backdrop { background: #101b19bf; backdrop-filter: blur(5px); }
+.language-dialog .eyebrow { margin-bottom: 20px; }
+.language-dialog h2 { font-size: clamp(30px, 5vw, 42px); letter-spacing: 0; line-height: 1.25; }
+.language-dialog h2>span, .language-dialog p>span, .language-dialog small>span { display: block; }
+.language-dialog h2>span[lang="ta"] { font-size: 23px; line-height: 1.7; margin-top: 14px; }
+.language-dialog p { font-size: 13px; line-height: 1.9; color: var(--muted); margin-top: 20px; }
+.language-dialog p>span[lang="ta"] { font-size: 12px; margin-top: 8px; }
+.language-options { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-block: 28px; }
+.language-options button { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; min-height: 110px; padding: 22px 18px; background: transparent; border: 1px solid var(--line); cursor: pointer; text-align: left; }
+.language-options button:hover, .language-options button[aria-pressed="true"] { background: var(--cream); border-color: var(--gold); }
+.language-options strong { font-size: 20px; font-weight: 500; }
+.language-options button>span { font-size: 11px; line-height: 1.8; color: var(--muted); }
+.language-dialog small { font-size: 11px; line-height: 1.9; color: var(--muted); }
+.language-dialog small>span[lang="ta"] { font-size: 10px; margin-top: 4px; }
+@media(max-width:480px) { .language-dialog { padding: 46px 24px 28px; } .language-options { gap: 12px; } .language-options button { padding: 18px 12px; } }
+
 .icon { width: 20px; height: 20px; flex-shrink: 0; }
 .button .icon { width: 17px; height: 17px; }
 .hero { position: relative; overflow: hidden; background: var(--navy); min-height: 660px; height: min(840px, 90svh); color: var(--paper); }
@@ -192,6 +210,26 @@
 .enquiry-form .form-success, .enquiry-form .form-error { margin-bottom: 0; font-size: 13px; padding: 14px; background: #e7eee2; color: #305331; }
 .form-success a { text-decoration: underline; }
 .enquiry-form .form-error { background: #f3e5df; color: #853a2a; }
+
+/* Careers */
+.careers-section { display: grid; grid-template-columns: 1fr 1fr; gap: 11%; align-items: start; }
+.careers-copy .eyebrow { margin-bottom: 25px; }
+.careers-copy h2 { margin-bottom: 28px; }
+.careers-copy>p { font-size: 14px; line-height: 1.95; color: var(--muted); max-width: 420px; }
+.careers-form input[type="file"] { padding-block: 14px; font-size: 12px; }
+.careers-form input[type="file"]::file-selector-button { margin-right: 12px; padding: 10px 14px; color: var(--ink); background: var(--cream); border: 1px solid var(--line); font: inherit; cursor: pointer; }
+.careers-form .career-file-help { margin: -10px 0 24px; font-size: 11px; }
+.careers-form .career-selected-file { display: flex; gap: 10px; align-items: flex-start; padding: 12px; background: var(--cream); font-size: 12px; overflow-wrap: anywhere; }
+.career-selected-file .icon { width: 16px; height: 20px; color: var(--gold); }
+.careers-form button:disabled, .careers-form input:disabled { opacity: .65; cursor: wait; }
+.career-handoff { margin-top: 22px; padding-top: 22px; border-top: 1px solid var(--line); }
+.career-handoff>p { font-size: 12px; line-height: 1.9; color: var(--ink); margin-bottom: 16px; }
+.career-handoff .text-link { font-size: 12px; }
+.career-handoff .career-share { margin-top: 20px; background: var(--cream); border-color: var(--line); color: var(--ink); }
+.career-handoff .career-share:hover { background: #e5ddce; }
+.career-handoff>small { display: block; margin-top: 12px; font-size: 11px; line-height: 1.9; color: var(--muted); }
+@media(max-width:1100px) { .careers-section { gap: 7%; } }
+@media(max-width:700px) { .careers-section { grid-template-columns: 1fr; gap: 35px; } .careers-copy>p { max-width: none; } }
 
 /* Footer */
 .site-footer { background: var(--navy); color: var(--paper); padding-top: 55px; }

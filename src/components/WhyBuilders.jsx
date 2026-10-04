@@ -5,7 +5,7 @@ import { transitions } from '../motion/transitions'
 
 const principles = [
   { title: 'Thoughtful design', copy: 'Architecture that responds to your land, your lifestyle and your aspirations.', image: '/images/villa-courtyard.jpg', alt: 'Courtyard design concept with shaded spaces and tropical planting', detail: 'Spaces with a sense of place.' },
-  { title: 'Precise execution', copy: 'A considered approach to structure, materials and every stage of construction.', image: '/images/villa-hero.jpg', alt: 'Contemporary villa design concept showing carefully aligned stone and timber details', detail: 'Care, from foundation to finish.' },
+  { title: 'Precise execution', copy: 'A considered approach to structure, materials and every stage of construction.', image: '/images/villa-hero.jpg', alt: 'Contemporary home design concept showing carefully aligned stone and timber details', detail: 'Care, from foundation to finish.' },
   { title: 'A complete experience', copy: 'From the first idea to the finished home, a journey that stays clear and personal.', image: '/images/villa-interior.jpg', alt: 'Finished interior design concept with warm natural materials', detail: 'One vision. Every detail.' },
 ]
 export default function WhyBuilders() {
